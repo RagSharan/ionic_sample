@@ -1,0 +1,30 @@
+﻿
+  <ion-navbar class="bar bar-header bar-assertive" color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()">
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+      <!--
+      <button ion-button icon-only (click)="addItem()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+          -->
+    </ion-buttons>
+  </ion-navbar>
+
+<!--
+<ion-menu [content]="content">
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #content [root]="rootPage"></ion-nav>
+    -->

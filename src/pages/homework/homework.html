@@ -1,0 +1,132 @@
+﻿<ion-header>
+  <ion-navbar no-border-bottom>
+    <page-menu></page-menu>   
+  </ion-navbar>
+
+  <ion-segment [(ngModel)]="segment" (ionChange)="filterSegments(segment)">
+    <ion-segment-button value="all">
+      All Post
+    </ion-segment-button>
+    <ion-segment-button value="favorites">
+      Favorites
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="reloadThreads($event)" *ngIf="segment=='all'">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="segment=='all'" no-border>
+     <ion-item>
+      <ion-row>
+        <ion-col col-2>
+            <button ion-button icon-only small color="danger" (click)="selectGroup()">
+            <ion-icon name="contacts"></ion-icon>
+            </button>
+        </ion-col>
+      <ion-col col-10> {{selectedName}}</ion-col>
+    </ion-row>
+  </ion-item>
+    
+    <ion-card *ngFor="let thread of homework" no-border>
+      <ion-item color="primary">
+        <ion-avatar item-left>
+          <forum-user-avatar [user]="thread.user"></forum-user-avatar>
+        </ion-avatar>
+        <h2>{{thread.user.username}}</h2>
+        <h4>{{thread.dateCreated | date:'medium'}}</h4>
+      </ion-item>
+
+      <ion-item color="light">
+        <h3>Subject</h3>
+        <ion-badge item-end color="light">{{thread.subject}}</ion-badge>
+      </ion-item>
+
+      <ion-item color="light">
+        <h3> Topic</h3>
+        <ion-badge item-end color="light">{{thread.topic}}</ion-badge>
+      </ion-item>
+
+      <ion-item text-wrap>
+        {{thread.question}}
+      </ion-item>
+      
+      <button ion-item (click)="reviewThread(thread.key)" color="light">
+          <ion-icon name='chatboxes' item-start color="primary"></ion-icon>Review
+          <ion-badge item-end>{{thread.reviewDate}}</ion-badge>
+        </button>
+      </ion-card>
+ <!--     <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(user.userkey)">
+          {{ 'DELETE_BUTTON' | translate }}
+        </button>
+      </ion-item-options>-->
+    
+  </ion-list>
+  
+  <ion-list *ngIf="segment=='favorites'" no-border>
+    <ion-item *ngIf="!flag">
+      <ion-row>
+        <ion-col col-2>
+            <button ion-button icon-only small color="danger" (click)="selectGroup()">
+            <ion-icon name="contacts"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-10> {{selectedName}}</ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-card *ngFor="let thread of homework" no-border>
+      <ion-item color="primary">
+        <ion-avatar item-left>
+          <forum-user-avatar [user]="thread.user"></forum-user-avatar>
+        </ion-avatar>
+        <h2>{{thread.user.username}}</h2>
+        <h4>{{thread.dateCreated | date:'medium'}}</h4>
+      </ion-item>
+      <ion-item color="light">
+        <h3>Subject</h3>
+        <ion-badge item-end color="light">{{thread.subject}}</ion-badge>
+      </ion-item>
+
+      <ion-item color="light">
+        <h3> Topic</h3>
+        <ion-badge item-end color="light">{{thread.topic}}</ion-badge>
+      </ion-item>
+
+      <ion-item text-wrap>
+        {{thread.question}}
+      </ion-item>
+
+      <button ion-item (click)="reviewFavoritesThread(thread.key, thread.selectedGroup)" color="light">
+        <ion-icon name='chatboxes' item-start style="color: #d03e84"></ion-icon>Review
+        <ion-badge item-end>{{thread.reviewDate}}</ion-badge>
+      </button>
+    </ion-card>
+    </ion-list>
+    <ion-fab right bottom *ngIf="flag">
+      <button ion-fab mini color="danger" (click)="createThread()"><ion-icon name="create"></ion-icon></button>
+    </ion-fab>
+</ion-content>
+
+
+<!--
+<ion-grid>
+        <ion-row>
+          <ion-col col-3><h3>Subject-</h3></ion-col>
+          <ion-col col-9><p>{{thread.subject}}</p></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3><h3>Topic-</h3></ion-col>
+          <ion-col col-9><p>{{thread.topic}}</p></ion-col>
+        </ion-row>
+        <ion-row>
+          <h3>HomeWork-</h3>
+        </ion-row>
+        <ion-row><p>{{thread.question}}</p></ion-row>
+
+      </ion-grid>
+  
+
+-->

@@ -1,0 +1,24 @@
+﻿<header>
+
+</header>
+<ion-content scroll="false">
+  <div class="splash-bg"></div>
+  <div class="splash-info">
+    <div class="splash-logo"></div>
+    <div class="splash-intro">
+      {{ 'WELCOME_INTRO' | translate }}
+    </div>
+  </div>
+    
+  <br /><br />
+  <div style="background: url(../../assets/img/Butterfly.jpg) center; background-size: cover;">
+    <button ion-button class="custom-button" block (click)="login()" color="primary">
+      <ion-icon name="lock" margin></ion-icon> {{ 'LOGIN' | translate }}
+    </button>
+
+    <button ion-button block clear (click)="signup()" class="signup">{{ 'SIGNUP' | translate }}</button>
+
+    <button ion-button block clear (click)="goToResetPassword()">{{ 'RESET PASSWORD' | translate }} </button>  
+  </div>
+  
+</ion-content>

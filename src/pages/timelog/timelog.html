@@ -1,0 +1,40 @@
+﻿<ion-header>
+  <ion-navbar color="danger">
+    <!-- <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title> 
+    <page-menu></page-menu> -->
+    <ion-item color="danger" no-lines>
+      <ion-avatar item-left>
+        <img *ngIf="!user.image" src="../../assets/img/profile.png">
+        <img *ngIf="user.image" src="{{user.image}}">
+      </ion-avatar>
+      <h4>{{user.username}}</h4>
+    </ion-item>
+  </ion-navbar>
+  
+</ion-header>
+<ion-content>
+ <ion-list>
+   <ion-list-header color="light">
+     <ion-row>
+       <ion-col col-2>
+         <button ion-button icon-only small color="danger" (click)="selectGroup()" *ngIf="flag">
+           <ion-icon name="contacts"></ion-icon>
+         </button>
+       </ion-col>
+       <ion-col col-4> {{groupName}}</ion-col>
+       <ion-col col-4> {{filterName}}</ion-col>
+       <ion-col col-2>
+         <button ion-button icon-only color="danger" small (click)="filterAttendace()">
+           <ion-icon name="compass"></ion-icon>
+         </button>
+       </ion-col>
+     </ion-row>
+   </ion-list-header>
+   <ion-item-divider color="light"> Month</ion-item-divider>
+   <ion-item-group *ngFor="let data of attendance | async">
+     <button ion-item *ngIf="data.status === 'Present'" color="primary"><h3>{{data.today}} - {{data.status}}</h3></button>
+     <button ion-item *ngIf="data.status === 'Absent'" color="red"><h3>{{data.today}} - {{data.status}}</h3></button>
+     </ion-item-group>
+     
+</ion-list> 
+</ion-content>

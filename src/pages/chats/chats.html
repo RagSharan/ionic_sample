@@ -1,0 +1,24 @@
+﻿<ion-header>
+    <ion-navbar color="danger">
+        <ion-title>Compose</ion-title>
+        <!--<ion-buttons end>
+            <ion-spinner color="light" *ngIf="!(chats | async)"></ion-spinner>
+        </ion-buttons>
+            -->
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+  
+  <form [formGroup]="groupTextForm" (ngSubmit)="onSubmit(groupTextForm.value)">
+    <ion-item>Send Message To <h2 item-right>{{groupName}}</h2></ion-item>
+    <ion-item [class.error]="!groupMessage.valid && groupMessage.touched">
+      <ion-label floating>Compose Message</ion-label>
+      <ion-textarea [formControl]="groupMessage" rows="10"></ion-textarea>
+    </ion-item>
+    <div *ngIf="groupMessage.hasError('required') && groupMessage.touched" class="error-box">* Group Message is required.</div>
+    <div *ngIf="groupMessage.hasError('minlength') && groupMessage.touched" class="error-box">* Type at least 100 characters.</div>
+    <br /><br />
+    <button ion-button type="submit" class="custom-button" [disabled]="!groupTextForm.valid" block>Submit</button>
+  </form>
+</ion-content>

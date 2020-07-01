@@ -1,0 +1,136 @@
+﻿
+<ion-header>
+  
+    <ion-navbar color="danger">
+      <ion-title>
+        User Profile
+      </ion-title>
+      
+      <ion-buttons end>
+        <button ion-button (click)="editUserData()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-buttons>      
+    </ion-navbar>
+</ion-header>
+<ion-content>
+  
+  <ion-refresher (ionRefresh)="reload($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngIf="usertype === 'teacher'">
+    <ion-card-header>Teacher Profile</ion-card-header>
+    <ion-list no-border>
+      <ion-list-header>
+        <ion-thumbnail item-left (click)="openImageOptions()">
+          <img src="{{userProfile.image}}">
+        </ion-thumbnail>
+        <h3>{{userProfile.username}}</h3>
+        <h4>{{userProfile.email}}</h4>
+        <h3>{{userProfile.contactNo}}</h3>
+      </ion-list-header>
+      <ion-item>
+        Designation <ion-note item-right><h2>{{userProfile.rank}}</h2></ion-note>
+      </ion-item>
+      <ion-item>
+        Subject<ion-note item-right><h2>{{userProfile.subject}}</h2></ion-note>
+      </ion-item>
+      <ion-item>
+        SchoolName<ion-note item-right><h2>{{userProfile.schoolName}}</h2></ion-note>
+      </ion-item>
+      <ion-item>
+        City<ion-note item-right><h2>{{userProfile.city}}</h2></ion-note>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-list *ngIf="editTeacherflag">
+    <ion-list-header>Edit Teacher Profile</ion-list-header>
+    <form [formGroup]="userDataAccountForm" (ngSubmit)="saveUserProfile(userDataAccountForm.value)">
+      <ion-item margin-top>
+        <ion-label stacked>Subjects</ion-label>
+        <ion-input type="text" formControlName="subject" name="subject" placeholder="{{userProfile.subject}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>SchoolName</ion-label>
+        <ion-input type="text" formControlName="schoolName" name="schoolName" placeholder="{{userProfile.schoolName}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Designation</ion-label>
+        <ion-input type="text" formControlName="rank" name="rank" placeholder="{{userProfile.rank}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>City</ion-label>
+        <ion-input type="text" formControlName="city" name="city" placeholder="{{userProfile.city}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Contact No</ion-label>
+        <ion-input type="text" formControlName="contactNo" name="contactNo" placeholder="{{userProfile.contactNo}}"></ion-input>
+      </ion-item>
+      <br /><br />
+
+      <button ion-button type="submit" class="custom-button" [disabled]="!userDataAccountForm.valid" block color="danger">
+        <ion-icon name="save" margin></ion-icon>Save
+      </button>
+    </form>
+  </ion-list>
+  
+  
+  
+  <ion-card *ngIf="usertype === 'parents'">
+    <ion-card-header>Parents Profile</ion-card-header>
+    <ion-list no-border>
+
+      <ion-list-header>
+        <ion-thumbnail item-left (click)="openImageOptions()">
+          <img src="{{userProfile.image}}">
+        </ion-thumbnail>
+        <h3>{{userProfile.username}}</h3>
+        <h4>{{userProfile.email}}</h4>
+        <h3>{{userProfile.contactNo}}</h3>
+      </ion-list-header>
+      
+      
+    </ion-list>
+  </ion-card>
+
+  <ion-list *ngIf="usertype === 'parents'" no-border>
+    <ion-list-header>Students Profile</ion-list-header>
+    <ion-card *ngFor="let student of currentItems">
+
+      <ion-item color="primary">
+        <ion-thumbnail item-left (click)="openImageOptions()">
+          <img src="{{student.image}}">
+        </ion-thumbnail>
+        <h3>{{student.username}}</h3>
+      </ion-item>
+        <ion-item>SchoolName- {{student.schoolName}}</ion-item>
+        <ion-item>Class- {{student.className}}</ion-item>
+        <ion-item>City- {{student.city}}</ion-item>
+        <ion-item>Student Stats</ion-item>
+    </ion-card>
+  </ion-list>
+  
+  <ion-list *ngIf="usertype === 'student'" no-border>
+      <ion-list-header color="primary">
+        <ion-thumbnail item-left (click)="openImageOptions()">
+          <img src="{{userProfile.image}}">
+        </ion-thumbnail>
+            {{userProfile.username}}
+      </ion-list-header>
+      <ion-item>SchoolName- {{userProfile.schoolName}}</ion-item>
+      <ion-item>Class- {{userProfile.className}}</ion-item>
+      <ion-item>City- {{userProfile.city}}</ion-item>
+      <ion-item>Student Stats</ion-item>
+  </ion-list>
+
+  
+
+<!--
+  <ion-fab right bottom>
+    <button ion-fab color="orange" (click)="editUserData()"><ion-icon name="create"></ion-icon></button>
+  </ion-fab>
+-->  
+
+</ion-content>

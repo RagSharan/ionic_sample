@@ -1,0 +1,59 @@
+﻿<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-header>
+
+  <ion-navbar color="danger">
+    <ion-title>Create Event</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content margin-top>
+  <form [formGroup]="eventsForm" (ngSubmit)="onSubmit(eventsForm.value)">
+    
+    <ion-toolbar color="danger">
+        <ion-toolbar color="light">
+          <!--  <ion-label floating style = "color:black; font-weight:bold;">{{selectedName}}</ion-label>             -->
+          {{selectedName}}
+            <ion-buttons end>
+              <button ion-button icon-only color="danger" (click)="selectGroup()">
+                <ion-icon name="people"></ion-icon>
+              </button>
+            </ion-buttons>
+          </ion-toolbar>
+    </ion-toolbar>
+        
+
+    <ion-item  [class.error]="!title.valid && title.touched">
+      <ion-label floating>Event Title</ion-label>
+      <ion-input type="text" formControlName="title"></ion-input>
+    </ion-item>
+    <div *ngIf="title.hasError('required') && title.touched" class="error-box">* Title is required.</div>
+    
+    <ion-item>
+      <ion-label>Start</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY HH:mm" formControlName="startTime" [min]="minDate"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>End</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY HH:mm"  formControlName="endTime" [min]="minDate"></ion-datetime>
+    </ion-item>
+    
+    <ion-item  [class.error]="!location.valid && location.touched">
+      <ion-label floating>Location</ion-label>
+      <ion-input type="text" formControlName="location"></ion-input>
+      <div *ngIf="location.hasError('required') && location.touched" class="error-box">* location is required.</div>
+    </ion-item>
+    <br /><br />
+    
+    
+      <button ion-button type="submit" class="custom-button" [disabled]="!eventsForm.valid" block color="danger">Send</button>
+    
+    
+  </form>
+</ion-content>

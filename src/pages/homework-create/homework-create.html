@@ -1,0 +1,56 @@
+﻿<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+
+<ion-header>
+  <ion-navbar no-border-bottom color="danger">
+    <ion-title> Create Homework</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="cancelNewThread()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding="true">
+
+    <ion-toolbar color="primary">
+     
+      <ion-toolbar color="light">
+        {{selectedName}}
+        <ion-buttons end>
+          <button ion-button icon-only color="danger" (click)="selectGroup()">
+            <ion-icon name="people"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-toolbar>
+
+    <form [formGroup]="homeworkForm" (ngSubmit)="onSubmit(homeworkForm.value)">
+      <ion-item>
+        <ion-label floating>Review Date</ion-label>
+        <ion-datetime displayFormat="MMM DD, YYYY" [formControl]="reviewDate"></ion-datetime> 
+      </ion-item>
+
+      <ion-item [class.error]="!subject.valid && subject.touched">
+        <ion-label floating>Subject</ion-label>
+        <ion-input type="text" value="" [formControl]="subject"></ion-input>
+      </ion-item>
+      <div *ngIf="subject.hasError('required') && subject.touched" class="error-box">* Subject is required.</div>
+
+      <ion-item [class.error]="!topic.valid && topic.touched">
+        <ion-label floating>Topic</ion-label>
+        <ion-input type="text" value="" [formControl]="topic"></ion-input>
+      </ion-item>
+      <div *ngIf="topic.hasError('required') && topic.touched" class="error-box">* Topic is required.</div>
+
+      <ion-item [class.error]="!question.valid && question.touched">
+        <ion-label floating>HomeWork</ion-label>
+        <ion-textarea [formControl]="question" rows="6"></ion-textarea>
+      </ion-item>
+      <div *ngIf="question.hasError('required') && question.touched" class="error-box">* Question is required.</div>
+      <div *ngIf="question.hasError('minlength') && question.touched" class="error-box">* Type at least 100 characters.</div>
+      <br /><br />
+      <button ion-button type="submit" class="custom-button" [disabled]="!homeworkForm.valid" block color="danger">Submit</button>
+    </form>
+
+</ion-content>

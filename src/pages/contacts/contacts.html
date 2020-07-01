@@ -1,0 +1,40 @@
+﻿<ion-header>
+  <ion-navbar>
+    <page-menu></page-menu>
+    <ion-buttons end>
+      <ion-spinner color="light" *ngIf="!(users)"></ion-spinner>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button icon-only small color="danger" (click)="selectGroup()">
+            <ion-icon name="contacts"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-8> {{selectedName}}</ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only color="danger" small (click)="openGroupMessagePage()" *ngIf="flag && selectedName != 'Contacts'">
+            <ion-icon name="chatboxes"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let user of users">
+      <button ion-item (click)="openChat(user)" *ngIf="user.userkey !== sender">
+        <ion-avatar item-left>
+          <img *ngIf="!user.image" src="../../assets/img/profile.png">
+          <img *ngIf="user.image" src="{{user.image}}">
+        </ion-avatar>
+        <h2>{{user.username}}</h2>
+        <ion-badge item-end color="primary">{{count}}</ion-badge>
+      </button>
+    </ion-item-sliding>
+  </ion-list>
+  
+</ion-content>

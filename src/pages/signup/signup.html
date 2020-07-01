@@ -1,0 +1,80 @@
+﻿<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-header>
+
+  <ion-navbar color="danger">
+    <ion-title>{{ 'SIGNUP_TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <!--style="background-color:transparent"-->
+  <form [formGroup]="createAccountForm" (ngSubmit)="onSubmit(createAccountForm.value)">
+    <ion-list>
+      <ion-list-header>
+        Create account
+      </ion-list-header>
+      
+      <ion-item [class.error]="!email.valid && email.touched">
+        <ion-label floating>Email address</ion-label>
+        <ion-input type="text" value="" [formControl]="email"></ion-input>
+      </ion-item>
+      <div *ngIf="email.hasError('required') && email.touched" class="error-box">* Email is required.</div>
+      <div *ngIf="email.hasError('isValid') && email.touched" class="error-box">* Enter a valid email address.</div>
+      
+      <ion-item [class.error]="!password.valid && password.touched">
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" value="" [formControl]="password"></ion-input>
+      </ion-item>
+      <div *ngIf="password.hasError('required') && password.touched" class="error-box">* Password is required.</div>
+      <div *ngIf="password.hasError('minlength') && password.touched" class="error-box">* Minimum password length is 5.</div>
+    
+      <ion-item [class.error]="!username.valid && username.touched">
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" value="" [formControl]="username"></ion-input>
+      </ion-item>
+      <div *ngIf="username.hasError('required') && username.touched" class="error-box">* Username is required.</div>
+      <div *ngIf="username.hasError('minlength') && username.touched" class="error-box">* Minimum password length is 8.</div>
+    
+      <ion-item>
+        <ion-label floating>UserType</ion-label>
+        <ion-select formControlName="usertype">
+          <ion-option value="teacher" checked="true">Teacher</ion-option>
+          <ion-option value="parents">Parents</ion-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>I accept terms of use</ion-label>
+        <ion-toggle [formControl]="terms" color="primary"></ion-toggle>
+      </ion-item>
+      <div *ngIf="terms.hasError('isChecked') && terms.touched" class="error-box">* You need to accept the terms of use.</div>
+    </ion-list>
+    <button ion-button block type="submit" color="primary" class="custom-button" [disabled]="!createAccountForm.valid">Confirm</button>
+  </form>
+
+</ion-content>
+<!--  <form (submit)="doSignup()">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
+        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
+        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+      </ion-item>
+
+      <div padding>
+        <button ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
+      </div>
+
+    </ion-list>
+  </form> -->

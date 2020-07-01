@@ -1,0 +1,29 @@
+﻿<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Review Homework</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="showCommentActions()" *ngIf="!flag">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      {{groupName}}
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let user of currentItems">
+      
+      <button ion-item (click)="openItem(user)" *ngIf="userId != user.userkey">
+     <ion-avatar item-left>
+          <img *ngIf="!user.image" src="../../assets/img/profile.png">
+          <img *ngIf="user.image" src="{{user.image}}">
+        </ion-avatar>
+        <h2>{{user.username}}</h2>
+      </button>
+      </ion-item-sliding>
+  </ion-list>
+</ion-content>

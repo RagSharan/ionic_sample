@@ -1,0 +1,37 @@
+﻿
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addUsersInGroup()">
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  
+  <ion-toolbar color="light">
+    <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
+    <ion-buttons end>
+      <button ion-button *ngIf="flag" icon-only (click)="doTFilter()" color="primary"><ion-icon name="funnel"></ion-icon></button>
+      <button ion-button *ngIf="!flag" icon-only (click)="doPFilter()" color="primary"><ion-icon name="funnel"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list no-border>
+    <span *ngFor="let user of users | async">
+      <ion-item (press)="changeVisibility()" (tap)="openItem(user.$key)" *ngIf="user.$key !== userId" no-lines class="haut">
+        <ion-label>
+          <ion-item>
+            <ion-avatar item-left>
+              <img *ngIf="!user.image" src="../../assets/img/profile.png">
+              <img *ngIf="user.image" src="{{user.image}}">
+            </ion-avatar>
+            <h2>{{user.username}}</h2>
+          </ion-item>
+        </ion-label>
+        <ion-checkbox *ngIf="visible" (ionChange)="selectUser(user.$key)"></ion-checkbox>
+      </ion-item>
+    </span>
+  </ion-list>
+</ion-content>

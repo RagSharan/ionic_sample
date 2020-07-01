@@ -1,0 +1,122 @@
+﻿
+<ion-header>
+
+  <ion-navbar color="danger">
+    <ion-title>
+      User Profile
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <ion-refresher (ionRefresh)="reload($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngIf="flag === 'teacher'">
+    <ion-card-header>
+      <ion-thumbnail item-left (click)="openImageOptions()">
+        <img src="{{userProfile.image}}">
+      </ion-thumbnail>
+      <h3>{{userProfile.username}}</h3>
+      <h4>{{userProfile.email}}</h4>
+      <h3>{{userProfile.contactNo}}</h3>
+    </ion-card-header>
+      <ion-item>
+        Designation <ion-note item-right><h2>{{userProfile.rank}}</h2></ion-note>
+      </ion-item>
+      <ion-item>
+        Subject<ion-note item-right><h2>{{userProfile.subject}}</h2></ion-note>
+      </ion-item>
+      <ion-item>
+        SchoolName<ion-note item-right><h2>{{userProfile.schoolName}}</h2></ion-note>
+      </ion-item>
+      <ion-item>
+        City<ion-note item-right><h2>{{userProfile.city}}</h2></ion-note>
+      </ion-item>
+  </ion-card>
+
+ <ion-card *ngIf="flag === 'student'">
+   <ion-card-header>
+     <!--
+     <ion-thumbnail item-left (click)="openImageOptions()">
+       <img src="{{userProfile.image}}">
+     </ion-thumbnail> -->
+     <h3>{{userProfile.username}}</h3>
+     SchoolName - <h4>{{userProfile.schoolName}}</h4>
+     City - <h3>{{userProfile.city}}</h3>
+   </ion-card-header>
+   <ion-card-content>
+     <h2>Student Stats</h2>
+   </ion-card-content>
+ </ion-card>
+
+  <ion-card *ngIf="flag === 'parents'">
+    <ion-card-header>Parents Profile</ion-card-header>
+    <ion-list no-border>
+
+      <ion-list-header>
+        <ion-thumbnail item-left (click)="openImageOptions()">
+          <img src="{{userProfile.image}}">
+        </ion-thumbnail>
+        <h3>{{userProfile.username}}</h3>
+        <h4>{{userProfile.email}}</h4>
+        <h3>{{userProfile.contactNo}}</h3>
+      </ion-list-header>
+
+    </ion-list>
+  </ion-card>
+  
+
+</ion-content>
+
+
+
+
+
+
+<!--
+<ion-header>
+
+  <ion-navbar color ="danger">
+    <ion-title>{{item.groupName}}</ion-title>
+  </ion-navbar>
+  <ion-searchbar [(ngModel)]="myInput"
+                 [type]="shouldShowCancel"
+                 (ionInput)="onInput($event)"
+                 (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list *ngIf="groupFlag">
+    <ion-item>
+       <h2>About Group- {{item.about}}</h2>
+    </ion-item>
+    <ion-list-header color="light">
+      <h2>Group Members</h2>
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let user of users">
+      <button ion-item (click)="open(user)">
+        <ion-avatar item-left>
+          <img *ngIf="!user.picture" src="../../assets/img/profile.png">
+          <img *ngIf="user.picture" src="{{user.image}}">
+        </ion-avatar>    
+        <h2>{{user.username}}</h2>
+      </button>
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(user.userkey)">
+          {{ 'DELETE_BUTTON' | translate }}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+      
+  <ion-fab right bottom>
+    <button ion-fab mini color="danger" (click)="openSearchPage(item)"><ion-icon name="person-add"></ion-icon></button>
+  </ion-fab>
+</ion-content>
+-->

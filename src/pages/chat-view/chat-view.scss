@@ -1,0 +1,30 @@
+﻿.chat-view {
+  .messages {
+    width: 100%;
+    position: absolute;
+
+    .message {
+      width: 70%;
+      padding: 5px 10px;
+      background: #E040FB;
+      color: #fff;
+      border-radius: 10px;
+      margin: 5px;
+      float: left;
+      font: body { font:bold 12px arial}
+    }
+
+    .message.me {
+      float: right;
+      background: #fff;
+      border: 1px solid #E040FB;
+      color: #222;
+      text-align: right;
+    }
+  }
+
+  ion-icon {
+    color: orangered;
+    font: 100px;
+  }
+}

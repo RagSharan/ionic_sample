@@ -1,0 +1,89 @@
+﻿<ion-header>
+
+  <ion-navbar color="danger">
+    <!--<ion-title>{{ 'CARDS_TITLE' | translate }}</ion-title>-->
+    <ion-title>New Student Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>Create New Child Profile</ion-card-header>
+    <ion-list>
+      <form [formGroup]="childDataForm" (ngSubmit)="saveChildProfile(childDataForm.value)">
+        <ion-item margin-top>
+          <ion-label stacked>Student Name</ion-label>
+          <ion-input type="text" formControlName="studentName" name="subject"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>SchoolName</ion-label>
+          <ion-input type="text" formControlName="schoolName" name="schoolName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Class</ion-label>
+          <ion-input type="text" formControlName="className" name="className"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>City</ion-label>
+          <ion-input type="text" formControlName="city" name="city"></ion-input>
+        </ion-item>
+        <br /><br />
+
+        <button ion-button type="submit" class="custom-button" [disabled]="!childDataForm.valid" block color="danger">
+          <ion-icon name="save" margin></ion-icon>Save
+        </button>
+
+      </form>
+
+    </ion-list>
+  </ion-card>
+
+
+
+
+
+
+
+
+  <!--
+  <ion-card *ngFor="let item of cardItems">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img [src]="item.user.avatar">
+      </ion-avatar>
+      <h2>{{item.user.name}}</h2>
+      <p>{{item.date}}</p>
+    </ion-item>
+
+    <img [src]="item.image">
+
+    <ion-card-content>
+      <p>{{item.content}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button color="primary" clear small icon-left>
+            <ion-icon name='thumbs-up'></ion-icon>
+            12 Likes
+          </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="primary" clear small icon-left>
+            <ion-icon name='text'></ion-icon>
+            4 Comments
+          </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          11h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+-->
+  
+</ion-content>

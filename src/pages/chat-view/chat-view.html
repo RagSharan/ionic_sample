@@ -1,0 +1,45 @@
+﻿<ion-header>
+  <ion-navbar color="danger">
+    <ion-item color="danger" no-lines>
+        <ion-avatar item-left>
+          <img *ngIf="!user.image" src="../../assets/img/profile.png">
+          <img *ngIf="user.image" src="{{user.image}}">
+        </ion-avatar>
+        <h4>{{user.username}}</h4>
+      
+    </ion-item>
+    <ion-buttons end>
+      <button ion-button (click)="sendPicture()"><ion-icon name="image" ></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #content padding class="chat-view" id="chat-view" color="light"> 
+  <ion-refresher (ionRefresh)="reloadMessages($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="messages">
+      <div class="message" *ngFor="let chat of chats" [ngClass]="{'me': sender === chat.sender}">
+            <span *ngIf="chat.message">{{chat.message}}</span>
+           <!--{{user.image}} <img *ngIf="chat.picture" src="{{chat.picture}}" class="picture"> -->
+      </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+       <ion-col col-10>
+          <ion-input type="text"  placeholder="Enter Message"
+              [(ngModel)]="message">
+          </ion-input>
+      </ion-col>
+      <ion-col col-2>
+          <button ion-button (click)="sendMessage()" color="danger"><ion-icon name="send"></ion-icon></button>
+      </ion-col>
+    </ion-row>    
+  </ion-toolbar>
+</ion-footer>
+
+<!--style="zoom:2.0;"-->

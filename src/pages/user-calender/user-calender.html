@@ -1,0 +1,114 @@
+﻿<ion-header>
+  <ion-navbar  no-border-bottom color="danger">
+    <page-menu></page-menu>
+    
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    
+    
+    <ion-list>
+    <ion-list-header>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button icon-only small color="danger" (click)="selectGroup()">
+            <ion-icon name="contacts"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-4> {{selectedName}}</ion-col>
+        
+        <ion-col col-4> {{filterName}}</ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only small color="danger" (click)="filterData()">
+            <ion-icon name="compass"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-list-header>
+
+      <ion-card *ngFor="let thread of eventsArray">
+       
+        <ion-item color="primary">
+          <ion-avatar item-left>
+            <forum-user-avatar [user]="thread.user"></forum-user-avatar>
+          </ion-avatar>
+          <h3>{{thread.user.username}}</h3>
+          <h4>{{thread.dateCreated | date:'medium'}}</h4>
+        </ion-item>
+        
+        <ion-item color="light">
+          <!--<ion-icon name="book" style="color: #d03e84"></ion-icon>-->
+          <h3>Subject</h3> 
+          <ion-badge item-end color="light">{{thread.title}}</ion-badge>
+        </ion-item>
+
+        <ion-item color="light">  
+          <h3> Location</h3>
+          <ion-badge item-end color="light">{{thread.location}}</ion-badge>
+        </ion-item>
+
+        <ion-item color="light">
+          <h3>StartTime</h3>
+          <ion-badge item-end color="light">{{thread.startTime | date:'medium'}}</ion-badge>
+        </ion-item>
+
+        <ion-item color="light">
+          <h3>EndTime</h3>
+          <ion-badge item-end color="light">{{thread.endTime | date:'medium'}}</ion-badge>
+        </ion-item>
+
+        
+        <!--
+        <ion-row class="left-border-primary" *ngIf ="getStatus(thread.evntKey)">
+          <ion-col>
+            <button ion-button color="secondary" [disabled]="!isDisableButton(thread.startTime)" (click)="acceptEvent(thread.evntKey)">
+              <ion-icon name="text"></ion-icon>
+              Accept
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <button ion-button color="danger" [disabled]="!isDisableButton(thread.startTime)" (click)="rejectEvent(thread.evntKey)">
+              <ion-icon name="delete"></ion-icon>
+              Reject
+            </button>
+          </ion-col>
+        </ion-row> -->
+      </ion-card>
+  </ion-list>
+
+    
+  <ion-fab right bottom>
+    <button ion-fab mini color="danger" (click)="addEvent()"><ion-icon name="create"></ion-icon></button>
+  </ion-fab>
+</ion-content>
+
+
+<!--
+
+  <ion-item>
+    {{ viewTitle }}
+  </ion-item>  
+
+
+    <ion-fab top right>
+      <button ion-fab mini color="danger"><ion-icon name="arrow-dropdown-circle"></ion-icon></button>
+      <ion-fab-list side="left" >
+        <button ion-fab (click)="changeMode('month')">M</button>
+        <button ion-fab (click)="changeMode('week')">W</button>
+        <button ion-fab (click)="changeMode('day')">D</button>
+      </ion-fab-list>
+    </ion-fab>
+
+    <calendar [eventSource]="eventSource"
+              [calendarMode]="calendar.mode"
+              [currentDate]="calendar.currentDate"
+              (onEventSelected)="onEventSelected($event)"
+              (onTitleChanged)="onViewTitleChanged($event)"
+              (onTimeSelected)="onTimeSelected($event)"
+              step="30"
+              [preserveScrollPosition]="true"
+              class="calendar">
+    </calendar>
+-->

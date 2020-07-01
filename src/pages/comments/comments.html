@@ -1,0 +1,66 @@
+﻿<ion-header>
+  <ion-navbar color="danger">
+    <ion-item color="danger" no-lines>
+      <ion-avatar item-left>
+        <img *ngIf="!student.image" src="../../assets/img/profile.png">
+        <img *ngIf="student.image" src="{{student.image}}">
+      </ion-avatar>
+      <h4>{{student.username}}</h4>
+    </ion-item>
+    <ion-buttons end>
+      <button ion-button (click)="showCommentActions()" *ngIf="!flag">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-list-header color="light"> 
+      <h3>Status-   <ion-badge color="primary">{{status}}</ion-badge></h3>
+      <button ion-button (click)="changeStatus()" icon-only item-right *ngIf="flag">
+        <ion-icon name="compass"></ion-icon>
+      </button>
+      
+    </ion-list-header>
+    <ion-item *ngFor="let comment of comments" text-wrap>
+      <ion-card>
+        <ion-item>
+          <ion-avatar item-left>
+            <forum-user-avatar [user]="comment.user"></forum-user-avatar>
+          </ion-avatar>
+          <h2>{{comment.user.username}}</h2>
+          <p>{{comment.dateCreated | date:'medium'}}</p>
+        </ion-item>
+        <ion-item>
+          <p>{{comment.commentText}}</p>
+        </ion-item>
+
+        
+        <ion-row class="left-border-primary">
+          <ion-col>
+            <button ion-button primary clear small (click)="vote(true,comment)">
+              <ion-icon name="arrow-dropup"></ion-icon>
+              <div>{{comment.votesUp}}</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button primary clear small (click)="vote(false,comment)">
+              <ion-icon name="arrow-dropdown"></ion-icon>
+              <div>{{comment.votesDown}}</div>
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <ion-note>
+              {{comment.dateCreated | date:"MM/dd/yy"}}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab mini color="danger"><ion-icon name="create" (click)="createComment()"></ion-icon></button>
+  </ion-fab>
+</ion-content>

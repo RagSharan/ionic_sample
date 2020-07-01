@@ -1,0 +1,96 @@
+﻿<ion-header>
+
+  <ion-navbar>
+    <page-menu></page-menu>
+  </ion-navbar>
+
+  <ion-segment [(ngModel)]="segment" (ionChange)="filterSegments(segment)">
+    <ion-segment-button value="contacts">
+      Contacts
+    </ion-segment-button>
+    <ion-segment-button value="requests">
+      Attendence
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+<!--  <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>  -->
+  
+  <ion-list *ngIf="segment=='contacts'">
+    <ion-list-header>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button icon-only small color="danger" (click)="selectGroup()">
+            <ion-icon name="contacts"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-8> {{selectedName}}</ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only color="danger" small (click)="openSearchPage()">
+            <ion-icon name="person-add"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+      
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let user of currentItems" >
+      <button ion-item (click)="openItem(user.userkey)" *ngIf ="userId != user.userkey">
+        <ion-avatar item-left>
+          <img *ngIf="!user.image" src="../../assets/img/profile.png">
+          <img *ngIf="user.image" src="{{user.image}}">
+        </ion-avatar>
+        <h2>{{user.username}}</h2>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(user.userkey)">
+          {{ 'DELETE_BUTTON' | translate }}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  
+  <ion-list *ngIf="segment == 'requests'">
+    <ion-list-header>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button icon-only small color="danger" (click)="selectGroup()">
+            <ion-icon name="contacts"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-8> {{selectedName}}</ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only color="danger" small (click)="openSearchPage()">
+            <ion-icon name="person-add"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let user of currentItems">
+      <button ion-item (click)="userAttendance(user)" *ngIf ="userId != user.userkey">
+        <ion-avatar item-left>
+          <img *ngIf="!user.image" src="../../assets/img/profile.png">
+          <img *ngIf="user.image" src="{{user.image}}">
+        </ion-avatar>
+        <h2>{{user.username}}</h2>
+      </button>
+      <ion-item-options side="right" *ngIf="flag">
+        <button ion-button color="primary" (click)="presentUser(user.userkey)">
+          {{ 'PRESENT' | translate }}
+        </button>
+      </ion-item-options>
+      <ion-item-options side="left" *ngIf="flag">
+        <button ion-button color="red" (click)="absentUser(user.userkey)">
+          {{ 'ABSENT' | translate }}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+   
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab mini *ngIf="flag" color="danger" (click)="addItem()"><ion-icon name="create"></ion-icon></button>
+   </ion-fab>
+</ion-content>
